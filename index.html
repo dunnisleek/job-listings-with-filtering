@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Interactive comments section</title>
+  <script src="https://unpkg.com/vue@next" defer></script>
+  <script src="app.js" defer></script>
+
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<!-- Pull dynamic content from the data.json file -->
+<div id="app" v-cloak>
+<!-- POPUP -->
+  <div class="overlay" v-show="showModal"></div>
+   <div class="modal" v-show="showModal">
+     <h2>Delete Comment</h2>
+     <p>Are you sure you want to delete? 
+      This will remove the comment and can't be undone.</p>
+      <button @click="closeModalCall" class="cancel">No, Cancel</button>
+      <button  @click="closeModalCall(); removeGoal(index);" class='delete'>Yes Delete</button>
+      <!-- @click="removeGoal(index)" -->
+   </div>
+<!-- END OF POPUP -->
+
+<!-- FRIST COMMENT -->
+
+<div class="wrap-comment">
+  <div class="vote-wrapper">
+      <button @click="incrementCount">+ </button>
+      <span>{{count}}</span> 
+      <button @click="decrementCount"> - </button>
+    </div>
+
+    <div class="comment">
+      <div class="third-maxblagun">
+      <img :src="data.currentUser.image.png" width="20"><br>
+        <p>
+          {{data.currentUser.username}}
+          <span>{{data.currentUser.createdAt}}</span>
+        </p>
+    </div>
+     
+     
+      <p>
+        <span class="maxblagun-content">{{data.currentUser.content}}</span><br>
+       <!-- {{item.score}} -->
+        {{data.currentUser.id}}
+      </p>
+      
+  </div>
+
+  <div class="reply-btn">
+      <button @click="showFirstDisplay">
+      <img src="images/icon-reply.svg">Reply</button>
+  </div>
+
+</div>
+
+<!-- this is the inner comment section  check this-->
+
+  <div class="inner-comment">
+   
+      <ul v-for="comment in data.currentUser.comments" :key="comment.id" >
+        <li>
+          
+          <div class="listItems-buttons">
+           <div class="comment-image">
+            
+            <div class="vote">
+              <button @click="comment.score++">+ </button>
+              <span> {{comment.score}}</span> 
+              <button v-if='comment.score> 0' @click="comment.score--"> - </button>
+              <button v-else>-</button>
+
+             
+            </div>
+          
+          
+            </div>
+           
+            <div class="comment">
+              <div class="third-maxblagun innerThirdComment">
+              
+             <img :src="comment.user.image.png" width="20"><br> 
+              <!-- <img v-else="visible" src="images/avatars/image-maxblagun.webp" width="20"> -->
+               <p>
+                  {{comment.username}}
+                  <span>{{comment.createdAt}}</span>
+                
+                  <div class="two-btn">
+                    <button @click="showModalCall"><img src='images/icon-delete.svg'/>Delete</button>
+                   <button @click="editComment(comment.id)"><img src='images/icon-edit.svg'/>Edit</button>
+                  </div>
+                  
+                </p>
+                
+            </div>
+        
+         
+          </div>
+           
+         
+          <p>{{ comment.content }}</p> 
+          
+        </li>
+          
+        
+      </ul> 
+
+
+        <!-- this is end of  the inner comment section -->
+   
+
+      
+      
+
+   <!-- START OF FORM MESSAGE -->
+
+  <form class="wrap-comment-form form-space" v-show="firstDisplay" @submit.prevent>
+    <img src="images/avatars/image-maxblagun.webp">
+   
+    
+    <div>
+      <input type="text" v-model="yourName" placeholder="username" class="username">
+      <textarea type="text" v-model="messageTwo"  placeholder="add a comment" rows="6"></textarea>
+    </div>
+
+    <div>
+      <button class="submitbutton" @click="addCommentTwo"  :disabled="!(messageTwo.length > 0)">SEND</button>
+     </div>
+
+    <!-- <p v-show="!awesome">
+     closed</p>  -->
+  </form>
+  <!-- END OF FORM MESSAGE -->
+
+</div>
+</div>
+
+</body>
+
+</html>
