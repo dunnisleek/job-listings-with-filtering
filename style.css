@@ -10,7 +10,7 @@
 
 *{
        box-sizing: border-box;
-       margin: 0 auto;
+       margin: 0;
 }
 nav{
        background-image: url(images/bg-header-desktop.svg);
@@ -31,6 +31,7 @@ body{
        flex-direction: column; 
        position: relative;
        justify-content: space-between;
+       
       
        /* display: inline-grid;
       width: 100%;
@@ -43,12 +44,13 @@ body{
         padding: 20px;
        background:#ffffff;
        width:70%;
+       margin: auto;
        border-left: 5px solid var(--Desaturated-Dark-Cyan);
        border-radius: 10px;
        margin-bottom: 20px;
        display:grid;
        grid-template-columns: 6% 35% auto ;
-       gap:30px;
+       gap:60px;
        text-align: left;
 }
 .middle{
@@ -64,15 +66,16 @@ ul {
        display:grid;
        grid-template-columns: 1fr 1fr 1fr ;
        gap:20px;
+       padding: 0px;
 }
-li{
+/* li{
    
        justify-content: space-evenly;
-}
+} */
 .middle div:first-child{
        display: flex;
        gap:20px;
-       justify-content: space-around;
+       
        
        margin-bottom: 10px;
    
@@ -93,6 +96,7 @@ li{
        border-radius: 4px ;
        padding: 10px;
        font-size: 14px;
+
        /* margin: 10px; */
 }
 input{
@@ -106,6 +110,8 @@ input{
       display: flex;
       justify-content: center;
       position: relative;
+      margin:20px auto;
+  
 }
 .new-btn{
        background-color: var(--Desaturated-Dark-Cyan);
@@ -129,17 +135,51 @@ input{
 .clear{
        position: absolute;
        left: 730px;
-       width:50px;
+      
        right:0;
         top:10px;
        background: transparent;
        color:var(--Desaturated-Dark-Cyan);
        border: none;
        cursor: pointer;
+       outline: none;
 }
 .clear:hover{
-       border-bottom: 2px solid var(--Desaturated-Dark-Cyan);
+       /* border-bottom: 2px solid var(--Desaturated-Dark-Cyan); */
+
 }
 [v-cloak]{
        display:none;
+}
+@media screen and (max-width : 500px){
+       body{
+              background: rgba(255, 192, 203, 0.569);
+       }
+       .firstRow{
+             display:flex;
+             flex-direction: column;
+             margin-top: 50px;
+             margin-bottom: 50px;
+       }
+       .firstRow div:nth-child(1){
+              margin: 0px;
+              position: relative;
+              top: -40px;
+       }
+       .middle div:first-child {
+              gap:0px;
+              width:230px;
+       }
+       .middle div:nth-child(2) {
+              margin-top: -20px;
+       }
+       .third {
+              display: grid;
+              grid-template-columns: 2fr 2fr 2fr;
+              gap:8px;
+       }
+       .clear {
+              left:0;
+       }
+
 }
